@@ -1,17 +1,17 @@
 Prompt - install or update: 
-I'm need a PowerShell script to install an application on new installs windows but also could be used on existing installs.  It must:
-1. check to see if the software is installed and if installed what version the software is at. 
+I need a PowerShell script to install or update the below listed application on new windows installs but also could be used on existing installs. The script must:
+1. check to see if the software is installed and if it is installed, what version the software is at. 
 2. check the what latest version of the software is
-3. If not installed, install the software to the version passed in as an argument or to the laterst version if not provided.  
+3. If not installed, install the software to the version passed in as an argument or to the latest version if specifc version is not provided.  
 4. If installed, and the version installed is earlier than either the latest or the version poassed in as an argument, prompt the user to (U) update or  (S) skip update for that package and keep the one installed. 
 5. The script should also take in these options as arguments so that the   -s and -u arguments -v (version) can be passed in so that the script can be used in automations. also if there are any arguments the package requires also, ie: Y to continue, please include these.
 
-If a specific version is passed in as an argument -v , then check the 
+github check: Some software packages especially on windows are difficult to maintian source control links or require additonal manual steps to download, for these pacakges, I typically host the binary in github. 
+If installing a specific version the script should:  
+1. check the parent folder in github for a folder called \bin\version-number\someBinary.exe before attempting to retrieve from source. ie: python\bin\3.12.0\python-3.12.0-amd64.exe
+2. If a package exists in the bin dir matching the version number passed as an argument -v, use this package, otherwise attempt to get from source.
 
+Please add ample echo statements to give feedback to the user as to the progress and various functions called, completed and any errors for debugging purposes. 
 
-Prompt - Specific Version w/ Github Binary:
-I'm need a PowerShell script to install an application on new Windows installs but also could be used on existing installs.  Could you write a script which checks to see if the following software is installed, and if not,  install the program , and if it is already installed check the version is excactly as the one required and if the version is not then prompt the user to update to the specified version, (U) update or  (S) skip update for that package and keep the existing. The script should also take in these options as arguments so that the   -s and -u arguments can be passed in so that the script can be used in automations. also if there are any arguments the package requires also, ie: Y to continue, please include these. 
-packages: 
-Dell Display Manager 2.2.0.43
-Bianary location: 
-https://github.com/schysys/winstalls-public/blob/c08bb20efb4aac48d352eb593015a7f85084d807/DellDisplayManager/2.2.0.43/ddmsetup.exe
+application: python 
+
