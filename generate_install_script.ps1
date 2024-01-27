@@ -50,14 +50,25 @@ function CreateInstallScript {
 
 "@  # Closing quote for the here-string
 
-    $githubRepoBase = "https://github.com/schysys/installs-public/tree/main/python/bin"
+    $githubRepoBase = "https://github.com/schysys/installs-public/tree/main/$packageName/bin"
 
+    # Updated template content to use Invoke-ScriptFromUrl
     $templateContent = @"
+function Invoke-ScriptFromUrl {
+    param(
+        [string]`$url
+    )
+    `$scriptContent = (Invoke-WebRequest `$url -UseBasicParsing).Content
+    if (-not [string]::IsNullOrWhiteSpace(`$scriptContent)) {
+        Invoke-Expression `$scriptContent
+    }
+}
+
 `$githubRepoBase = '$githubRepoBase'
 
-. 'https://github.com/schysys/installs-public/blob/f0e39570be498e66ea446e836f966f17a794e28e/std_parameters.ps1'
-. 'https://github.com/schysys/installs-public/blob/f0e39570be498e66ea446e836f966f17a794e28e/std_color.ps1'
-. 'https://github.com/schysys/installs-public/blob/f0e39570be498e66ea446e836f966f17a794e28e/std_log_format.ps1'
+Invoke-ScriptFromUrl -url 'https://raw.githubusercontent.com/schysys/installs-public/f0e39570be498e66ea446e836f966f17a794e28e/std_parameters.ps1'
+Invoke-ScriptFromUrl -url 'https://raw.githubusercontent.com/schysys/installs-public/f0e39570be498e66ea446e836f966f17a794e28e/std_color.ps1'
+Invoke-ScriptFromUrl -url 'https://raw.githubusercontent.com/schysys/installs-public/f0e39570be498e66ea446e836f966f17a794e28e/std_log_format.ps1'
 
 # Add your installation logic here
 "@

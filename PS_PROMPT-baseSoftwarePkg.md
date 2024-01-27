@@ -22,6 +22,24 @@ application: python
 
 Below are the std colors for messages and common arguments. Note: This base script will be referenced as a dependency for an install of other applications and will be called externally from those scripts and chained together.  
 
+1. Add error handling
+2. Version Parameter Handling: The $v parameter, which is supposed to carry the desired version number, might not be correctly passed or interpreted in the Install-PythonFromExternalScript function. Ensure that this parameter is correctly being set and passed through the script.
+
+3. Software package Version Check and Update Logic: The script checks the current Python version and compares it to the desired version ($v). However, it's essential to ensure that the Install-PythonFromExternalScript function is correctly designed to handle the version upgrade. This function should include logic to uninstall the current version of Python and install the new one.
+
+Python Installation Script: The external Python installation script (install_python.ps1) that is being invoked should have the capability to uninstall the existing Python version and install the new specified version. If this script does not have this functionality, it will not upgrade Python to the desired version.
+
+Script Execution Permissions: Ensure that your PowerShell session has the necessary permissions to install software on your system. Sometimes, administrative privileges are required to install or update software like Python.
+
+
+Enhance the Install-PythonFromExternalScript Function: Modify this function to handle the uninstallation of the current Python version if it's different from the desired version. You may need administrative privileges to uninstall the current version.
+
+Check the External Python Installation Script: Verify that the install_python.ps1 script can handle different versions and includes logic to uninstall the current version if necessary.
+
+Run as Administrator: Ensure you are running the PowerShell script as an administrator, especially if installing or uninstalling software requires elevated privileges.
+
+
+
 <!-- 
 
 std_color.ps1
